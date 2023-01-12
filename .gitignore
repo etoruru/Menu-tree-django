@@ -1,0 +1,6 @@
+venv
+.idea
+menu/menu/__pycache__
+menu/menuTree/__pycache__
+menu/menuTree/migrations/__pycache__
+menu/menuTree/templatetags/__pycache__
