@@ -1,21 +1,33 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
-from .models import  MenuItem
+from .models import Menu,MenuItem
 
 
 # Create your views here.
 def index(request):
-    menu = MenuItem.objects.filter(level=0)
+    menu = Menu.objects.all()
     output = {
-        "menu" : menu
+        "menu": menu,
+        "path": request.path
     }
-    return render(request, 'menu.html', output)
+    return render(request, 'index.html', output)
 
 
-def filter(request, menu_item_id):
-    queryset = MenuItem.objects.select_related('parent')
+def menuItems(request, menu_id):
+    menu = MenuItem.objects.filter(menu=menu_id, parent=None)
     output = {
-        "menu": queryset
+        "active": menu,
+        "path": request.path
     }
-    return render(request, 'menu.html', output)
+    return render(request, 'index.html', output)
+
+
+def filter_items(request,menu_id, menu_item_id):
+    active = MenuItem.objects.get(pk=menu_item_id)
+
+    output = {
+        "active": active,
+        "path": request.path,
+        "menu_id": menu_id
+    }
+    return render(request, 'menuItem.html', output)

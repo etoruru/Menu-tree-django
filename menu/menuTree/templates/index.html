@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu</title>
+</head>
+<body>
+{{ path }}
+    {% if menu %}
+    <ul>
+        {% for m in menu %}
+        <li><a target="_self" href="/menu/{{ m.id }}">{{ m.title }}</a></li>
+        {% endfor %}
+
+    </ul>
+{% endif %}
+        {% if active %}
+    <ul>
+        {% for m in active %}
+        <li><a target="_self" href="{{ path }}{{ m.id }}">{{ m.title }}</a></li>
+        {% endfor %}
+
+    </ul>
+{% endif %}
+
+</body>
+</html>
